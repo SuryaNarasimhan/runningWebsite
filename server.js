@@ -14,6 +14,10 @@ const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY
 });
 
+app.get("/", (req, res) => {
+  res.send("RunFit backend is running!");
+});
+
 app.post("/chat", async (req, res) => {
   const userMessage = req.body.message;
 
