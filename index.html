@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-top: 100px;
+  background: #f0f4f8;
+}
+
+#chatbox {
+  margin: 40px auto;
+  width: 350px;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+}
+
+#messages {
+  min-height: 100px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+input {
+  padding: 8px;
+  width: 220px;
+}
+
+button {
+  padding: 8px 12px;
+}
+</style>
+</head>
+
+<body>
+  <h1>Ask Surya</h1>
+  <p>This chatbot talks to my backend server.</p>
+
+  <div id="chatbox">
+    <h2>Chatbot</h2>
+
+    <div id="messages"></div>
+
+    <input id="userInput" placeholder="Ask something..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+<script>
+async function sendMessage() {
+  const input = document.getElementById("userInput");
+  const messages = document.getElementById("messages");
+  const userMessage = input.value;
+
+  messages.innerHTML += `<p><b>You:</b> ${userMessage}</p>`;
+  input.value = "";
+
+  const response = await fetch("http://localhost:3000/chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message: userMessage
+    })
+  });
+
+  const data = await response.json();
+
+  messages.innerHTML += `<p><b>Bot:</b> ${data.reply}</p>`;
+}
+</script>
+
+</body>
+</html>
