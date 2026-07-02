@@ -25,7 +25,8 @@ app.post("/chat", async (req, res) => {
     messages: [
       {
         role: "system",
-        content: "You are Surya's website chatbot. Answer briefly and helpfully."
+        content:
+  "You are RunFit AI, a running route and shoe advisor. Analyze the user's running route description. Give advice in these sections: Route Summary, Shoe Features to Look For, Training Tips, Injury Risk Notes, and Final Recommendation. Do not claim to diagnose medical issues."
       },
       {
         role: "user",
